@@ -1,8 +1,7 @@
 ---
 version: "2"
 services:
-  bookstack:
-    type: web
+  - type: web
     url: docker.io/linuxserver/bookstack
     name: bookstack
     runtime: docker
@@ -33,8 +32,7 @@ services:
     # restart: unless-stopped
     depends_on:
       - bookstack_db
-  bookstack_db:
-    type: web
+  - type: web
     url: docker.io/linuxserver/mariadb
     name: bookstack_db
     runtime: docker
