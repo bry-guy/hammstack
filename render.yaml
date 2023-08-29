@@ -30,13 +30,6 @@ services:
     disk:
       name: app_data
       mountPath: /config
-    # volumes: 
-    #   - ./bookstack_app_data:/config
-    # ports:
-    #   - 6875:80
-    # restart: unless-stopped
-    # depends_on:
-    #   - bookstack_db
   - type: web
     runtime: image
     plan: starter
@@ -60,9 +53,23 @@ services:
         sync: false
       - key: PORT
         value: 3306
-    # volumes:
-    #   - ./bookstack_db_data:/config
     disk:
       name: db_data
       mountPath: /config
-    # restart: unless-stopped
+  - type: cron
+    name: suspender
+    runtime: image
+    plan: free
+    # schedule: "0 0 * * *"
+    schedule: "* * * * *"
+    startCommand: |
+        curl --request POST \
+        --url https://api.render.com/v1/services/srv-cjmmcivjbvhs73d1b900/suspend \
+        --header "accept: application/json" \
+        --header "authorization: $API_KEY"
+    image:
+      url: docker.io/curlimages/curl
+    envVars:
+      - key: API_KEY
+        sync: false
+
