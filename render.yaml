@@ -13,7 +13,7 @@ services:
       - key: PGID
         value: 1000
       - key: APP_URL
-        value: https://bookstack.example.com
+        value: https://bookstack-om21.onrender.com
       - key: DB_HOST
         value: bookstack-db-66gf
       - key: DB_PORT
