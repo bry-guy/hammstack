@@ -59,7 +59,7 @@ services:
   - type: cron
     name: suspender
     runtime: image
-    plan: free
+    plan: starter
     # schedule: "0 0 * * *"
     schedule: "* * * * *"
     startCommand: |
