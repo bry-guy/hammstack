@@ -4,7 +4,7 @@ services:
   - type: web
     url: docker.io/linuxserver/bookstack
     name: bookstack
-    runtime: docker
+    runtime: image
     envVars:
       - key: PUID
         value: 1000
@@ -35,7 +35,7 @@ services:
   - type: web
     url: docker.io/linuxserver/mariadb
     name: bookstack_db
-    runtime: docker
+    runtime: image
     envVars:
       - key: PUID
         value: 1000
