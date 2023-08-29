@@ -1,0 +1,61 @@
+---
+version: "2"
+services:
+  bookstack:
+    type: web
+    url: docker.io/linuxserver/bookstack
+    name: bookstack
+    runtime: docker
+    envVars:
+      - key: PUID
+        value: 1000
+      - key: PGID
+        value: 1000
+      - key: APP_URL
+        value: https://bookstack.example.com
+      - key: DB_HOST
+        value: bookstack_db
+      - key: DB_PORT
+        value: 3306
+      - key: DB_USER
+        value: bookstack
+      - key: DB_DATABASE
+        value: bookstackapp
+      - key: DB_PASS
+        sync: false
+    disk:
+      name: app_data
+      mountPath: /config
+    # volumes: 
+    #   - ./bookstack_app_data:/config
+    ports:
+      - 6875:80
+    # restart: unless-stopped
+    depends_on:
+      - bookstack_db
+  bookstack_db:
+    type: web
+    url: docker.io/linuxserver/mariadb
+    name: bookstack_db
+    runtime: docker
+    envVars:
+      - key: PUID
+        value: 1000
+      - key: PGID
+        value: 1000
+      - key: TZ
+        value: Europe/London
+      - key: MYSQL_DATABASE
+        value: bookstackapp
+      - key: MYSQL_USER
+        value: bookstack
+      - key: MYSQL_ROOT_PASSWORD
+        sync: false
+      - key: MYSQL_PASSWORD
+        sync: false
+    # volumes:
+    #   - ./bookstack_db_data:/config
+    disk:
+      name: db_data
+      mountPath: /config
+    # restart: unless-stopped
