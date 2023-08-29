@@ -15,9 +15,10 @@ services:
       - key: APP_URL
         value: https://bookstack.example.com
       - key: DB_HOST
-        value: bookstack_db
+        value: bookstack-db-66gf
       - key: DB_PORT
-        value: 3306
+        # value: 3306
+        value: 10000
       - key: DB_USER
         value: bookstack
       - key: DB_DATABASE
