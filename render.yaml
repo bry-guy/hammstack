@@ -58,18 +58,16 @@ services:
       mountPath: /config
   - type: cron
     name: suspender
-    runtime: image
+    runtime: go
     plan: starter
     # schedule: "0 0 * * *"
     schedule: "* * * * *"
+    buildCommand: echo 'nobuild'
     startCommand: |
         curl --request POST \
         --url https://api.render.com/v1/services/srv-cjmmcivjbvhs73d1b900/suspend \
         --header "accept: application/json" \
         --header "authorization: $API_KEY"
-    image:
-      url: docker.io/curlimages/curl
     envVars:
       - key: API_KEY
         sync: false
-
