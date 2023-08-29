@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 if [ -z "$API_KEY" ]; then
 		echo "ERROR: Missing API_KEY env var."
 		exit 1

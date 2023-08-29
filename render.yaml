@@ -60,7 +60,7 @@ services:
     name: flipper
     runtime: go
     plan: starter
-    schedule: "0 0 * * *"
+    schedule: "0 0,7 * * *"
     buildCommand: echo 'nobuild'
     startCommand: ./flipper.sh
     envVars:
