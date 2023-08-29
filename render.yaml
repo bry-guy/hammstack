@@ -60,14 +60,37 @@ services:
     name: suspender
     runtime: go
     plan: starter
-    # schedule: "0 0 * * *"
-    schedule: "* * * * *"
+    schedule: "0 0 * * *"
     buildCommand: echo 'nobuild'
     startCommand: |
         curl --request POST \
         --url https://api.render.com/v1/services/srv-cjmmcivjbvhs73d1b900/suspend \
         --header "accept: application/json" \
-        --header "authorization: $API_KEY"
+        --header "authorization: $API_KEY" \
+        && \
+        curl --request POST \
+        --url https://api.render.com/v1/services/srv-cjmmcivjbvhs73d1b8ug/suspend \
+        --header "accept: application/json" \
+        --header "authorization: $API_KEY" \
+    envVars:
+      - key: API_KEY
+        sync: false
+  - type: cron
+    name: resumer
+    runtime: go
+    plan: starter
+    schedule: "0 7 * * *"
+    buildCommand: echo 'nobuild'
+    startCommand: |
+        curl --request POST \
+        --url https://api.render.com/v1/services/srv-cjmmcivjbvhs73d1b900/resume \
+        --header "accept: application/json" \
+        --header "authorization: $API_KEY" \
+        && \
+        curl --request POST \
+        --url https://api.render.com/v1/services/srv-cjmmcivjbvhs73d1b8ug/resume \
+        --header "accept: application/json" \
+        --header "authorization: $API_KEY" \
     envVars:
       - key: API_KEY
         sync: false
