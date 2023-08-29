@@ -18,13 +18,15 @@ services:
         value: bookstack-db-66gf
       - key: DB_PORT
         # value: 3306
-        value: 10000
+        value: 3306
       - key: DB_USER
         value: bookstack
       - key: DB_DATABASE
         value: bookstackapp
       - key: DB_PASS
         sync: false
+      - key: PORT
+        value: 6875:443
     disk:
       name: app_data
       mountPath: /config
@@ -56,6 +58,8 @@ services:
         sync: false
       - key: MYSQL_PASSWORD
         sync: false
+      - key: PORT
+        value: 3306
     # volumes:
     #   - ./bookstack_db_data:/config
     disk:
