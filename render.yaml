@@ -3,6 +3,7 @@ version: "1"
 services:
   - type: web
     runtime: image
+    plan: free
     image: 
       url: docker.io/linuxserver/bookstack
     name: bookstack
@@ -35,6 +36,7 @@ services:
     #   - bookstack_db
   - type: web
     runtime: image
+    plan: starter
     image:
       url: docker.io/linuxserver/mariadb
     name: bookstack_db
