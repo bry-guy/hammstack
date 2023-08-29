@@ -9,7 +9,7 @@ fi
 
 SERVICE_LIST=$(curl --request GET --url https://api.render.com/v1/services --header "authorization: Bearer $API_KEY")
 
-SUSPEND_TYPE_COUNT=$(echo "$SERVICE_LIST" | jq '.[].service.suspended' | awk '{print $1}' | uniq | wc -l | tr -d " ")
+SUSPEND_TYPE_COUNT=$(echo "$SERVICE_LIST" | jq '.[].service.suspended' | grep 'srv' | awk '{print $1}' | uniq | wc -l | tr -d " ")
 
 if [ "$SUSPEND_TYPE_COUNT" != "1" ]; then
 		echo "ERROR: Too many suspend types."
