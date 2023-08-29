@@ -3,7 +3,7 @@ version: "1"
 services:
   - type: web
     runtime: image
-    plan: free
+    plan: starter
     image: 
       url: docker.io/linuxserver/bookstack
     name: bookstack
